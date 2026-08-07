@@ -29,6 +29,7 @@ This repository is designed to answer five practical questions:
 - [Tools and technologies](#tools-and-technologies)
 - [Repository layout](#repository-layout)
 - [Clone and reproduce](#clone-and-reproduce)
+- [Step-by-step learning guide and notes](#step-by-step-learning-guide-and-notes)
 - [Implementation runbook](#implementation-runbook)
 - [Splunk and endpoint configuration](#splunk-and-endpoint-configuration)
 - [Telemetry sources](#telemetry-sources)
@@ -47,6 +48,7 @@ This repository is designed to answer five practical questions:
 | Workstream | State | Completion evidence required |
 |---|---|---|
 | Architecture and build guide | Documented | Peer review of this README |
+| Step-by-step learning modules and notes | Documented | Clean-clone and link validation |
 | VMware network and VMs | Build pending | VM inventory and network screenshots |
 | Splunk receiver | Build pending | Receiving-port and service-health evidence |
 | Windows logging and Sysmon | Build pending | Event Viewer and Splunk ingestion evidence |
@@ -278,6 +280,22 @@ soc-monitoring-incident-response/
 ├── reports/
 │   └── templates/
 └── docs/
+    ├── lab-guide/
+    │   ├── README.md
+    │   ├── 01-safety-and-planning.md
+    │   ├── 02-vmware-and-network.md
+    │   ├── 03-splunk-server.md
+    │   ├── 04-windows-telemetry-and-sysmon.md
+    │   ├── 05-universal-forwarder.md
+    │   ├── 06-ingestion-and-baseline.md
+    │   ├── 07-detection-validation.md
+    │   ├── 08-triage-response-and-evidence.md
+    │   └── 09-reproduce-and-publish.md
+    ├── reference/
+    │   ├── COMMAND-REFERENCE.md
+    │   ├── LEARNING-NOTES.md
+    │   ├── ANALYST-WORKBOOK.md
+    │   └── TROUBLESHOOTING-MATRIX.md
     └── evidence/
         ├── README.md
         └── images/
@@ -312,13 +330,50 @@ https://github.com/RanvirSinghSaini/soc-monitoring-incident-response.git
 2. Compare your hardware with the [host requirements](#host-requirements).
 3. Create the isolated virtual network and VMs.
 4. Record local substitutions in a private build worksheet; do not commit credentials.
-5. Follow the [implementation runbook](#implementation-runbook) in order.
+5. Follow the [numbered learning guide](docs/lab-guide/README.md) in order.
 6. Run the validation searches before generating any test behavior.
 7. Capture evidence using the required labels and filenames.
 8. Compare your results with the acceptance criteria, not with screenshots alone.
 
 > [!NOTE]
 > Vendor installers are not redistributed in this repository. Download them from their official sources, verify publisher signatures or hashes where provided, and record the tested versions in your evidence notes.
+
+## Step-by-step learning guide and notes
+
+The main README defines the project. The numbered learning guide teaches how to
+build, validate, explain, and showcase it. Each module includes prerequisites,
+exact steps, command explanations, expected results, screenshot checkpoints,
+pass criteria, common mistakes, and rollback guidance.
+
+### Numbered build modules
+
+| Order | Guide | Result |
+|---:|---|---|
+| `01` | [Safety and planning](docs/lab-guide/01-safety-and-planning.md) | Authorized scope, version log, evidence plan, snapshots |
+| `02` | [VMware and network](docs/lab-guide/02-vmware-and-network.md) | Isolated host-only network and three addressed VMs |
+| `03` | [Splunk server](docs/lab-guide/03-splunk-server.md) | Splunk Web, project indexes, and TCP receiver |
+| `04` | [Windows telemetry and Sysmon](docs/lab-guide/04-windows-telemetry-and-sysmon.md) | Auditing, PowerShell logs, and Sysmon validation |
+| `05` | [Universal Forwarder](docs/lab-guide/05-universal-forwarder.md) | Forwarder configuration and end-to-end data path |
+| `06` | [Ingestion and baseline](docs/lab-guide/06-ingestion-and-baseline.md) | Source inventory, field quality, delay, and normal baseline |
+| `07` | [Detection validation](docs/lab-guide/07-detection-validation.md) | Safe positive/negative tests for `DET-001`–`DET-008` |
+| `08` | [Triage, response, and evidence](docs/lab-guide/08-triage-response-and-evidence.md) | Priority scoring, timeline, playbook, closure, evidence |
+| `09` | [Reproduce and publish](docs/lab-guide/09-reproduce-and-publish.md) | Sanitized public release and clean-clone verification |
+
+Start with the [learning-path index and progress tracker](docs/lab-guide/README.md).
+
+### Reusable notes and references
+
+| Reference | How to use it |
+|---|---|
+| [Command reference](docs/reference/COMMAND-REFERENCE.md) | Understand command purpose, privileges, effects, and rollback before execution |
+| [SOC learning notes](docs/reference/LEARNING-NOTES.md) | Learn telemetry, SIEM, detection, ATT&CK, triage, response, and evidence concepts |
+| [Analyst workbook](docs/reference/ANALYST-WORKBOOK.md) | Record inventories, changes, baselines, tests, cases, timelines, evidence, and lessons |
+| [Troubleshooting matrix](docs/reference/TROUBLESHOOTING-MATRIX.md) | Diagnose from the local event source through the SIEM and detection layer |
+
+> [!IMPORTANT]
+> The guides explain and prepare the lab; they do not replace execution
+> evidence. Project workstreams remain pending until their acceptance tests and
+> labeled screenshots are completed.
 
 ## Implementation runbook
 
