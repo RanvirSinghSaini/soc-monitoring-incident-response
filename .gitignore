@@ -1,0 +1,42 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.key
+*.pem
+*.pfx
+*.p12
+
+# Raw security data — sanitize and document before publishing
+data/raw/
+logs/
+*.evtx
+*.etl
+*.pcap
+*.pcapng
+*.dmp
+
+# Private or unreviewed evidence
+docs/evidence/images/private/
+docs/evidence/images/unreviewed/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.log
